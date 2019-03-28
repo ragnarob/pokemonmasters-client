@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Pokemon Masters</string>
-    <string name="WelcomScreen">Pokemon Battle Simulator</string>
+    <string name="app_name">Pokemon Battle Simulator</string>
     <string name="PlayFriendsButt">Battle Friends</string>
     <string name="FindBattleButt">Find Battle</string>
     <string name="TeamBuildButt">Teambuilder</string>
+    <string name="action_settings">Settings</string>
 </resources>
