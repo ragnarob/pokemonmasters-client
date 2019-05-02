@@ -21,4 +21,8 @@ public class TeamOverviewActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
     }
 
+    private void getData() {
+
+    }
+
 }
