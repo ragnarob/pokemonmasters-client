@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.progark.pokemonmasters">
-    
+
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -13,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".PokeSelectActivity"></activity>
         <activity
             android:name=".BattleFriendsActivity"
             android:parentActivityName=".MainActivity" />

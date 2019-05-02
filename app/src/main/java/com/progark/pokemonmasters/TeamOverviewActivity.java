@@ -1,5 +1,6 @@
 package com.progark.pokemonmasters;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +24,11 @@ public class TeamOverviewActivity extends AppCompatActivity {
 
     private void getData() {
 
+    }
+
+    public void createTeam(View view) {
+        Intent intent = new Intent(this, PokeSelectActivity.class);
+        startActivity(intent);
     }
 
 }
