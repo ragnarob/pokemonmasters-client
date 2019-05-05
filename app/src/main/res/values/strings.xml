@@ -4,5 +4,7 @@
     <string name="FindBattleButt">Find Battle</string>
     <string name="TeamBuildButt">Teambuilder</string>
     <string name="action_settings">Settings</string>
-    <string name="NewTeam">Cerate Team</string>
+    <string name="NewTeam">Create Team</string>
+    <string name="PokeSpecies">Species</string>
+    <string name="Teams">Your Teams</string>
 </resources>

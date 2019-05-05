@@ -1,6 +1,13 @@
 package com.progark.pokemonmasters.util;
 
+import android.util.Log;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
+
+import com.progark.pokemonmasters.model.Pokemon;
 import com.progark.pokemonmasters.model.PokemonList;
+
+import java.io.Serializable;
 
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
@@ -25,10 +32,11 @@ public class Data {
 
     private ApiService apiService = retrofit.create(ApiService.class);
 
-    private Single<PokemonList> pokemonList = apiService.getPokemon();
+    private Single<PokemonList> pokeSingle = apiService.getPokemon();
 
-    public void getData() {
-        pokemonList.subscribeOn(Schedulers.io())
+
+    public void getData(final ArrayAdapter<Pokemon> pokeAdapter) {
+        pokeSingle.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<PokemonList>() {
                     @Override
@@ -36,14 +44,16 @@ public class Data {
                         compositeDisposable.add(d);
                     }
 
+
                     @Override
                     public void onSuccess(PokemonList pokemonList) {
-
+                        pokeAdapter.addAll(pokemonList.getPokemon());
+                        Log.i("PokeNetwork", "Networking successful");
                     }
 
                     @Override
                     public void onError(Throwable e) {
-
+                        Log.e("Network", "Skylder på Ragnar!!!", e);
                     }
                 });
     }

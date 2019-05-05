@@ -33,7 +33,9 @@
 
         <ListView
             android:id="@+id/pokeList"
+            style="@style/Widget.AppCompat.Light.ListView.DropDown"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

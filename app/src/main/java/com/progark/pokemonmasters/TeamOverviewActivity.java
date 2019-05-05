@@ -22,10 +22,6 @@ public class TeamOverviewActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
     }
 
-    private void getData() {
-
-    }
-
     public void createTeam(View view) {
         Intent intent = new Intent(this, PokeSelectActivity.class);
         startActivity(intent);
