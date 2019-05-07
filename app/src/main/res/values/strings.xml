@@ -7,4 +7,5 @@
     <string name="NewTeam">Create Team</string>
     <string name="PokeSpecies">Species</string>
     <string name="Teams">Your Teams</string>
+    <string name="AddToTeam">Add to team</string>
 </resources>

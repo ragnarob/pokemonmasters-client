@@ -9,7 +9,7 @@ import retrofit2.http.Path;
 
 public interface ApiService {
 
-    @GET("api/pokemon")
+    @GET("pokemon")
     Single<PokemonList> getPokemon();
 
     @GET("pokemon/{pokemon_id")
