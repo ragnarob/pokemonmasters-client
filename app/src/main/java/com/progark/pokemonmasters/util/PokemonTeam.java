@@ -1,21 +1,20 @@
 package com.progark.pokemonmasters.util;
 
-import com.progark.pokemonmasters.model.Pokemon;
 import java.util.List;
 
 public class PokemonTeam {
 
-    private List<Pokemon> team;
+    private List<BattleReadyPokemon> team;
 
-    public List<Pokemon> getTeam() {
+    public List<BattleReadyPokemon> getTeam() {
         return team;
     }
 
-    public void addPokemon(Pokemon pokemon) {
+    public void addPokemon(BattleReadyPokemon pokemon) {
         team.add(pokemon);
     }
 
-    public void removePokemon(Pokemon pokemon) {
+    public void removePokemon(BattleReadyPokemon pokemon) {
         team.remove(pokemon);
     }
 

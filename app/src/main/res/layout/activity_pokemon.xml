@@ -24,8 +24,8 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
             android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         <TextView
             android:id="@+id/species"
@@ -33,12 +33,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
+            android:drawableEnd="@{pokemon.thumbnail}"
+            android:drawablePadding="50dp"
             android:fontFamily="serif"
             android:text="@{pokemon.species}"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:drawableEnd="@{pokemon.thumbnail}"
-            android:drawablePadding="50dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
@@ -55,23 +55,36 @@
             app:layout_constraintStart_toStartOf="parent" />
 
         <include
+            android:id="@+id/include"
             layout="@layout/base_stats"
-            android:layout_width="225dp"
+            android:layout_width="wrap_content"
             android:layout_height="275dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/types"
             app:layout_constraintTop_toBottomOf="@+id/species"
             bind:stat="@{pokemon.baseStats}" />
 
         <ListView
             android:id="@+id/types"
-            android:layout_width="131dp"
-            android:layout_height="268dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
+            android:layout_width="123dp"
+            android:layout_height="173dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.484"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include" />
+
+        <ListView
+            android:id="@+id/moves"
+            android:layout_width="190dp"
+            android:layout_height="256dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/include"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/species" />
     </android.support.constraint.ConstraintLayout>

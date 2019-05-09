@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.progark.pokemonmasters.util.TeamSingleton;
+
 public class TeamOverviewActivity extends AppCompatActivity {
 
     @Override
@@ -20,6 +22,7 @@ public class TeamOverviewActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
 
         ab.setDisplayHomeAsUpEnabled(true);
+
     }
 
     public void createTeam(View view) {
