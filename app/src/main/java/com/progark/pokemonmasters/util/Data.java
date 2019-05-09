@@ -28,10 +28,9 @@ public class Data {
     private ApiService apiService = retrofit.create(ApiService.class);
 
     private Single<PokemonList> pokeListSingle = apiService.getPokemon();
-    private Single<Pokemon> pokeSingle;
 
 
-    public void getPokeList(final ArrayAdapter<Pokemon> pokeAdapter) {
+    public void getPokeList(final PokemonList targetList) {
         pokeListSingle.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<PokemonList>() {
@@ -43,34 +42,13 @@ public class Data {
 
                     @Override
                     public void onSuccess(PokemonList pokemonList) {
-                        pokeAdapter.addAll(pokemonList.getPokemon());
+                        targetList.setPokemon(pokemonList);
                         Log.i("PokeNetwork", "Networking successful");
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         Log.e("Network", "Skylder på Ragnar!!!", e);
-                    }
-                });
-    }
-
-    public void getPokemon(int pokeId, final Pokemon targetPokemon) {
-        pokeSingle = apiService.getSinglePokemon(pokeId);
-        pokeSingle.subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Pokemon>() {
-                    @Override
-                    public void onSubscribe(Disposable d) {
-                        compositeDisposable.add(d);
-                    }
-
-                    @Override
-                    public void onSuccess(Pokemon pokemon) {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Log.e("Network", "Single poke trouble", e);
                     }
                 });
     }
