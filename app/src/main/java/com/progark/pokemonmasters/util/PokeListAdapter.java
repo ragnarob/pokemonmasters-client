@@ -2,6 +2,7 @@ package com.progark.pokemonmasters.util;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ public class PokeListAdapter extends ArrayAdapter<Pokemon> {
         super(context, 0, pokemon);
     }
 
+    @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         Pokemon pokemon = getItem(position);
@@ -33,7 +35,7 @@ public class PokeListAdapter extends ArrayAdapter<Pokemon> {
         String pokeNum = "p" + pokemon.getNum().toString();
         TextView tvSpecies = (TextView) convertView.findViewById(R.id.species);
         tvSpecies.setText(pokeSpecies);
-        pokeSpecies = pokeSpecies.toLowerCase();
+
         int id;
         GifDrawable sprite;
         Drawable hmm;

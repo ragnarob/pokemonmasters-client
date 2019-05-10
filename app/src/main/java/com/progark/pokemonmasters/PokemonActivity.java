@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.Drawable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -13,15 +14,14 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.progark.pokemonmasters.databinding.ActivityPokemonBinding;
 import com.progark.pokemonmasters.model.BaseStatsDataModel;
-import com.progark.pokemonmasters.model.Move;
 import com.progark.pokemonmasters.model.Pokemon;
 import com.progark.pokemonmasters.model.PokemonDataModel;
 import com.progark.pokemonmasters.util.BattleReadyPokemon;
 import com.progark.pokemonmasters.util.PokeSingleton;
+import com.progark.pokemonmasters.util.TeamList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,14 +76,13 @@ public class PokemonActivity extends AppCompatActivity {
             }
 
                 if (pokeMoves.size() != 4) {
-                    Toast.makeText(PokemonActivity.this,
+                    Snackbar.make(findViewById(R.id.pokeActivityLayout),
                             msg,
-                            Toast.LENGTH_LONG).show();
+                            Snackbar.LENGTH_LONG).show();
                 } else {
                     BattleReadyPokemon battleReadyPokemon = new BattleReadyPokemon(pokemon.getSpecies(), pokeMoves);
-                    Toast.makeText(PokemonActivity.this,
-                            battleReadyPokemon.toString(),
-                            Toast.LENGTH_LONG).show();
+                    TeamList.getInstance().getActiveTeam().addPokemon(battleReadyPokemon);
+                    finish();
                 }
         }});
 

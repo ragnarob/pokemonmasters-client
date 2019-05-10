@@ -32,13 +32,10 @@ public class PokeSelectActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
         ActionBar ab = getSupportActionBar();
-
         ab.setDisplayHomeAsUpEnabled(true);
 
         final PokeListAdapter adapter = new PokeListAdapter(this, viewPokemon);
-
         adapter.addAll(PokeSingleton.getInstance().getPokemon());
 
         ListView listView = findViewById(R.id.pokemonListView);
