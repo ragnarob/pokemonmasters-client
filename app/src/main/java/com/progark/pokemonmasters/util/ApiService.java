@@ -12,7 +12,7 @@ public interface ApiService {
     @GET("pokemon")
     Single<PokemonList> getPokemon();
 
-    @GET("pokemon/{pokemon_id")
+    @GET("pokemon/{pokemon_id}")
     Single<Pokemon> getSinglePokemon(@Path("pokemon_id") int pokemonId);
 
 }
