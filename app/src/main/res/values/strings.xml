@@ -4,4 +4,6 @@
     <string name="FindBattleButt">Find Battle</string>
     <string name="TeamBuildButt">Teambuilder</string>
     <string name="action_settings">Settings</string>
+    <string name="POKEMON">POKEMON</string>
+    <string name="FIGHT">FIGHT</string>
 </resources>
