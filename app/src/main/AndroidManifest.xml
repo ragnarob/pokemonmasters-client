@@ -12,8 +12,15 @@
         android:roundIcon="@mipmap/poke_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".BattleScreenActivity"></activity>
+        <activity
+            android:name=".PokemonActivity"
+            android:parentActivityName=".PokeSelectActivity"/>
+        <activity
+            android:name=".PokeSelectActivity"
+            android:parentActivityName=".TeamOverviewActivity"/>
         <activity
             android:name=".BattleFriendsActivity"
             android:parentActivityName=".MainActivity" />

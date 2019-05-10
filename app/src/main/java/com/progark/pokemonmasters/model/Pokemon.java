@@ -1,5 +1,6 @@
 package com.progark.pokemonmasters.model;
 
+
 import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -11,7 +12,7 @@ public class Pokemon {
     private Integer num;
     @SerializedName("species")
     @Expose
-    private String species;
+        private String species;
     @SerializedName("types")
     @Expose
     private List<String> types = null;
@@ -62,6 +63,11 @@ public class Pokemon {
 
     public Abilities getAbilities() {
         return abilities;
+    }
+
+    @Override
+    public String toString() {
+        return species;
     }
 
     public void setAbilities(Abilities abilities) {
