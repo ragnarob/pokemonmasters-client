@@ -18,6 +18,7 @@ import com.progark.pokemonmasters.util.TeamListAdapter;
 public class TeamOverviewActivity extends AppCompatActivity {
 
     private TeamListAdapter adapter;
+    private TeamList teamList = TeamList.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +30,11 @@ public class TeamOverviewActivity extends AppCompatActivity {
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
 
-        adapter = new TeamListAdapter(this, TeamList.getInstance());
-        adapter.addAll(TeamList.getInstance());
+            adapter = new TeamListAdapter(this, teamList);
 
         ListView listView = findViewById(R.id.pokeTeams);
         listView.setAdapter(adapter);
-        Log.i("TeamList", TeamList.getInstance().toString());
+        Log.i("TeamList", teamList.toString());
 
     }
 
@@ -44,9 +44,10 @@ public class TeamOverviewActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
+
     public void createTeam(View view) {
-        if (!(TeamList.getInstance().size() < 1)) {
-            Log.i("TeamList", TeamList.getInstance().getActiveTeam().toString());
+        if (!(teamList.size() < 1)) {
+            Log.i("TeamList", teamList.getActiveTeam().toString());
         }
         TeamList.getInstance().add(new PokemonTeam(0));
         Intent intent = new Intent(this, PokeSelectActivity.class);

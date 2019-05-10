@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.progark.pokemonmasters.util.Data;
 import com.progark.pokemonmasters.util.PokeSingleton;
+import com.progark.pokemonmasters.util.TeamList;
 
 public class MainActivity extends AppCompatActivity {
 
