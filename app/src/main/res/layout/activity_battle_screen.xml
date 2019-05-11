@@ -1,89 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".BattleScreenActivity">
+    android:id="@+id/layout">
 
-    <TableLayout
-        android:layout_width="715dp"
-        android:layout_height="395dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <data>
 
-        <TableRow
-            android:id="@+id/topRow"
-            android:layout_width="match_parent"
-            android:layout_height="107dp">
+    </data>
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:text="TextView" />
-        </TableRow>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <TableRow
-            android:id="@+id/middleRow"
-            android:layout_width="match_parent"
-            android:layout_height="150dp">
+        <TextView
+            android:id="@+id/opponentPokemonName"
+            android:layout_width="195dp"
+            android:layout_height="45dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:ems="10"
+            android:fontFamily="monospace"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textView3"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:text="TextView" />
-        </TableRow>
+        <TextView
+            android:id="@+id/myHealth"
+            android:layout_width="186dp"
+            android:layout_height="117dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="monospace"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/myPokemonName"
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@tools:sample/avatars" />
 
-        <TableRow
-            android:id="@+id/bottomRow"
-            android:layout_width="match_parent"
-            android:layout_height="226dp">
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/myPokemon"
+            android:layout_width="196dp"
+            android:layout_height="235dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="104dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/opponentHealth" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="587dp"
-                android:layout_height="match_parent"
-                android:text="TextView" />
+        <pl.droidsonroids.gif.GifImageView
+            android:id="@+id/opponentPokemon"
+            android:layout_width="196dp"
+            android:layout_height="235dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TableLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/opponentHealth"
+            android:layout_width="186dp"
+            android:layout_height="117dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="13dp"
+            android:fontFamily="monospace"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toStartOf="@+id/opponentPokemon"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/opponentPokemonName"
+            tools:ignore="ContentDescription"
+            tools:srcCompat="@tools:sample/avatars" />
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/myPokemonName"
+            android:layout_width="195dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="76dp"
+            android:layout_marginEnd="4dp"
+            android:ems="10"
+            android:fontFamily="monospace"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/opponentPokemon" />
 
-                    <Button
-                        android:id="@+id/fightButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/FIGHT" />
+        <TextView
+            android:id="@+id/fightInfo"
+            android:layout_width="205dp"
+            android:layout_height="159dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="8dp"
+            android:ems="10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/PokemonButton"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent" />
 
-                </TableRow>
+        <Button
+            android:id="@+id/FightButton"
+            android:layout_width="184dp"
+            android:layout_height="69dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="8dp"
+            android:onClick="chooseMove"
+            android:text="@string/fightButton"
+            app:layout_constraintBottom_toTopOf="@+id/PokemonButton"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-                <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+        <Button
+            android:id="@+id/PokemonButton"
+            android:layout_width="184dp"
+            android:layout_height="70dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="8dp"
+            android:onClick="choosePokemon"
+            android:text="@string/pokemonButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-                    <Button
-                        android:id="@+id/pokemonButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/POKEMON" />
+        <Button
+            android:id="@+id/move1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="3dp"
+            android:onClick="move1"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/move3"
+            app:layout_constraintEnd_toStartOf="@+id/move2" />
 
-                </TableRow>
+        <Button
+            android:id="@+id/move2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="3dp"
+            android:onClick="move2"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/move4"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-            </TableLayout>
+        <Button
+            android:id="@+id/move4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="44dp"
+            android:onClick="move4"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-        </TableRow>
+        <Button
+            android:id="@+id/move3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="44dp"
+            android:onClick="move3"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/move4" />
 
-    </TableLayout>
-</android.support.constraint.ConstraintLayout>
+        <ListView
+            android:id="@+id/pokeTeamList"
+            android:layout_width="185dp"
+            android:layout_height="184dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+    </android.support.constraint.ConstraintLayout>
+
+</layout>

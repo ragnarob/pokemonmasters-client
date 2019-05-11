@@ -9,4 +9,6 @@
     <string name="Teams">Your Teams</string>
     <string name="AddToTeam">Add to team</string>
     <string name="SpriteDesc">Pokemon Sprite</string>
+    <string name="fightButton">Fight</string>
+    <string name="pokemonButton">Pokemon</string>
 </resources>
