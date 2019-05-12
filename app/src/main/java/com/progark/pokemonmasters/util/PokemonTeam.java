@@ -1,5 +1,7 @@
 package com.progark.pokemonmasters.util;
 
+import com.progark.pokemonmasters.model.Pokemon;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,4 +39,9 @@ public class PokemonTeam {
     public String toString() {
         return team.toString();
     }
+
+    public BattleReadyPokemon getPokemon(int index){
+        return team.get(index);
+    }
+
 }

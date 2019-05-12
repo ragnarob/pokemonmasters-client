@@ -4,26 +4,33 @@ import java.util.List;
 
 public class BattleReadyPokemon {
 
-    private String id;
+    private String species;
     private List<String> moves;
+    private int id;
 
-    public BattleReadyPokemon(String id, List<String> moves) {
-        this.id = id;
+    public BattleReadyPokemon(String species, List<String> moves, int id) {
+        this.species = species;
         this.moves = moves;
+        this.id = id;
+
     }
 
-    public String getId() {
-        return id;
+    public String getSpecies() {
+        return this.species;
     }
 
     public List<String> getMoves() {
         return moves;
     }
 
+    public int getId(){
+        return this.id;
+    }
+
     @Override
     public String toString() {
         return "BattleReadyPokemon{" +
-                "id='" + id + '\'' +
+                "species='" + species + '\'' +
                 ", moves=" + moves +
                 '}';
     }

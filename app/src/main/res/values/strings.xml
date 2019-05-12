@@ -13,4 +13,6 @@
     <string name="JoinGameButt">Join Game</string>
     <string name="PlayerNameHint">Enter your name</string>
     <string name="confirmNameButt">Confirm</string>
+    <string name="fightButton">Fight</string>
+    <string name="pokemonButton">Pokemon</string>
 </resources>
