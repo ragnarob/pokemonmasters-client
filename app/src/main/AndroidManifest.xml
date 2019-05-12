@@ -21,7 +21,7 @@
             android:name=".PokeSelectActivity"
             android:parentActivityName=".TeamOverviewActivity"/>
         <activity
-            android:name=".BattleFriendsActivity"
+            android:name=".CreateGameActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".FindBattleActivity"

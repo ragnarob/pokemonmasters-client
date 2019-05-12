@@ -1,5 +1,7 @@
 package com.progark.pokemonmasters.util;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.progark.pokemonmasters.model.DetailedMove;
 import com.progark.pokemonmasters.model.Pokemon;
 
@@ -14,8 +16,6 @@ public class GameStateManager {
 
     private String playerName;
     private Pokemon pokemon;
-
-
 
     public Boolean getReady() {
         return ready;
