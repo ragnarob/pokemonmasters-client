@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void battleFriends(View view) {
-        Intent intent = new Intent(this, BattleFriendsActivity.class);
+        Intent intent = new Intent(this, BattleScreenActivity.class);
         startActivity(intent);
     }
 

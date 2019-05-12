@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class TeamList extends ArrayList<PokemonTeam> {
 
     private static final TeamList ourInstance = new TeamList();
+    private int battleTeamIndex;
 
     private TeamList(){}
 
@@ -19,6 +20,14 @@ public class TeamList extends ArrayList<PokemonTeam> {
 
     public PokemonTeam getActiveTeam() {
         return super.get(super.size()-1);
+    }
+
+    public void setBattleTeam(int index){
+        this.battleTeamIndex = index;
+    }
+
+    public PokemonTeam getBattleTeam(){
+        return this.get(battleTeamIndex);
     }
 
 }

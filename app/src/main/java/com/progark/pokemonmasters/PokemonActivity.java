@@ -80,7 +80,7 @@ public class PokemonActivity extends AppCompatActivity {
                             msg,
                             Snackbar.LENGTH_LONG).show();
                 } else {
-                    BattleReadyPokemon battleReadyPokemon = new BattleReadyPokemon(pokemon.getSpecies(), pokeMoves);
+                    BattleReadyPokemon battleReadyPokemon = new BattleReadyPokemon(pokemon.getSpecies(), pokeMoves, pokemon.getNum());
                     TeamList.getInstance().getActiveTeam().addPokemon(battleReadyPokemon);
                     finish();
                 }
