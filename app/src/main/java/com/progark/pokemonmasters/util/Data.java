@@ -3,9 +3,11 @@ package com.progark.pokemonmasters.util;
 import android.util.Log;
 import android.widget.ArrayAdapter;
 
+import com.progark.pokemonmasters.JoinGameActivity;
 import com.progark.pokemonmasters.model.GameInstance;
 import com.progark.pokemonmasters.model.Pokemon;
 import com.progark.pokemonmasters.model.PokemonList;
+import com.progark.pokemonmasters.model.Status;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -82,10 +84,96 @@ public class Data {
                 });
     }
 
+    public void joinGame(ApiPost apiPost, final JoinGameActivity activity) {
+        apiService.joinGame(apiPost).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<GameInstance>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        compositeDisposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(GameInstance gameInstance) {
+                        updateGameInstance(gameInstance);
+                        activity.createTeam();
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("JoinGame", e.getMessage());
+                    }
+                });
+    }
+
+    public void createTeam(ApiPost apiPost) {
+        apiService.createTeam(apiPost).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Status>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        compositeDisposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(Status status) {
+                        Log.i("createTeamSSS", status.getStatus() + status.getError());
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("createTeamEEE", e.getMessage());
+                    }
+                });
+    }
+
+    public void getGameStatus(ApiPost apiPost) {
+        apiService.getGameStatus(apiPost).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Status>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        compositeDisposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(Status status) {
+                        updateGameInstance(status.getGameInstance());
+                        Log.i("getGameStatus", "Hope");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("getGameStatus", e.getMessage());
+                    }
+                });
+    }
+
     private void updateGameInstance(GameInstance remoteInstance) {
         GameInstance localInstance = GameInstanceSingleton.getInstance().getGameInstance();
-        localInstance.setGameCode(remoteInstance.getGameCode());
-        localInstance.setGameToken(remoteInstance.getGameToken());
+        if (!(remoteInstance.getGameCode() == null)){
+            localInstance.setGameCode(remoteInstance.getGameCode());
+        }
+        if (!(remoteInstance.getGameToken() == null)){
+            localInstance.setGameToken(remoteInstance.getGameToken());
+        }
+        if (!(remoteInstance.getPlayerNames() == null)){
+            localInstance.setPlayerNames(remoteInstance.getPlayerNames());
+        }
+        if (!(remoteInstance.getState() == null)){
+            localInstance.setState(remoteInstance.getState());
+        }
+        if (!(remoteInstance.getId() == null)){
+            localInstance.setId(remoteInstance.getId());
+        }
+        if (!(remoteInstance.getGameStage() == null)){
+            localInstance.setGameStage(remoteInstance.getGameStage());
+        }
+        if (!(remoteInstance.getV() == null)){
+            localInstance.setV(remoteInstance.getV());
+        }
 
     }
 

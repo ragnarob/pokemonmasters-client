@@ -7,11 +7,13 @@ public class BattleReadyPokemon {
     private String species;
     private List<String> moves;
     private int id;
+    private String name;
 
     public BattleReadyPokemon(String species, List<String> moves, int id) {
         this.species = species;
         this.moves = moves;
         this.id = id;
+        this.name = species;
 
     }
 
@@ -33,5 +35,9 @@ public class BattleReadyPokemon {
                 "species='" + species + '\'' +
                 ", moves=" + moves +
                 '}';
+    }
+
+    public String getName() {
+        return name;
     }
 }

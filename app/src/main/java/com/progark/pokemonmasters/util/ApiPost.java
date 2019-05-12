@@ -1,5 +1,7 @@
 package com.progark.pokemonmasters.util;
 
+import java.util.List;
+
 public class ApiPost {
 
     private String playerName;
@@ -7,7 +9,7 @@ public class ApiPost {
     private String gameCode;
     private String type;
     private int swap;
-    private BattleReadyPokemonList pokemonList;
+    private List<BattleReadyPokemon> pokemonList;
 
     public String getPlayerName() {
         return playerName;
@@ -49,11 +51,11 @@ public class ApiPost {
         this.swap = swap;
     }
 
-    public BattleReadyPokemonList getPokemonList() {
+    public List<BattleReadyPokemon> getPokemonList() {
         return pokemonList;
     }
 
-    public void setPokemonList(BattleReadyPokemonList pokemonList) {
+    public void setPokemonList(List<BattleReadyPokemon> pokemonList) {
         this.pokemonList = pokemonList;
     }
 }

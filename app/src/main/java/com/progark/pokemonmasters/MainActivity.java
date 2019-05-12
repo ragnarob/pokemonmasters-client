@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void findBattle(View view) {
-        Intent intent = new Intent(this, FindBattleActivity.class);
+        Intent intent = new Intent(this, JoinGameActivity.class);
         startActivity(intent);
     }
 

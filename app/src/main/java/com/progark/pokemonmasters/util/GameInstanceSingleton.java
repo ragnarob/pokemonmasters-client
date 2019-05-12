@@ -11,6 +11,7 @@ public class GameInstanceSingleton {
     }
 
     private GameInstance gameInstance;
+    private String playerName;
 
     private GameInstanceSingleton() {
         gameInstance = new GameInstance();
@@ -18,5 +19,13 @@ public class GameInstanceSingleton {
 
     public GameInstance getGameInstance() {
         return gameInstance;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
     }
 }

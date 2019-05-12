@@ -30,7 +30,7 @@ public interface ApiService {
     Single<Status> createTeam(@Body ApiPost apiPost);
 
     @POST("game/gamestatus")
-    Single<GameInstance> getGameStatus(@Body ApiPost apiPost);
+    Single<Status> getGameStatus(@Body ApiPost apiPost);
 
     @POST("game/action")
     Single<GameInstance> addAction(@Body ApiPost apiPost);

@@ -8,7 +8,7 @@ public class GameState {
 
     @SerializedName("pokemon")
     @Expose
-    private List<Object> pokemon = null;
+    private List<GameStatePokemon> pokemon = null;
     @SerializedName("_id")
     @Expose
     private String id;
@@ -16,11 +16,11 @@ public class GameState {
     @Expose
     private String playerName;
 
-    public List<Object> getPokemon() {
+    public List<GameStatePokemon> getPokemon() {
         return pokemon;
     }
 
-    public void setPokemon(List<Object> pokemon) {
+    public void setPokemon(List<GameStatePokemon> pokemon) {
         this.pokemon = pokemon;
     }
 

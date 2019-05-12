@@ -40,6 +40,7 @@ public class GameInstance extends BaseObservable {
 
     public void setState(State state) {
         this.state = state;
+        notifyPropertyChanged(BR.state);
     }
 
     @Bindable
@@ -100,5 +101,6 @@ public class GameInstance extends BaseObservable {
         this.v = v;
         notifyPropertyChanged(BR.v);
     }
+
 
 }
