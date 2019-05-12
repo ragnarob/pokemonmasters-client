@@ -148,15 +148,24 @@ public class BattleScreenActivity extends AppCompatActivity {
     }
 
     public void move2(View view){
+        apiPost.setGameCode(gameInstanceSingleton.getGameInstance().getGameCode());
+        apiPost.setGameToken(gameInstanceSingleton.getGameInstance().getGameToken());
+        postData.getGameStatus(apiPost);
         visibilityReset();
     }
 
     public void move3(View view){
+        apiPost.setGameCode(gameInstanceSingleton.getGameInstance().getGameCode());
+        apiPost.setGameToken(gameInstanceSingleton.getGameInstance().getGameToken());
+        postData.getGameStatus(apiPost);
         visibilityReset();
     }
 
     public void move4(View view){
-       visibilityReset();
+        apiPost.setGameCode(gameInstanceSingleton.getGameInstance().getGameCode());
+        apiPost.setGameToken(gameInstanceSingleton.getGameInstance().getGameToken());
+        postData.getGameStatus(apiPost);
+        visibilityReset();
     }
 
     public void visibilityReset(){

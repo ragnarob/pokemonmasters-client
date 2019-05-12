@@ -61,9 +61,10 @@ public class CreateGameActivity extends AppCompatActivity {
     }
 
     public void toBattle(View view) {
-//        apiPost.setGameToken(GameInstanceSingleton.getInstance().getGameInstance().getGameToken());
-//        apiPost.setPokemonList(TeamList.getInstance().getBattleTeam().getTeam());
-//        postData.createTeam(apiPost);
+        apiPost.setPlayerName(playerName);
+        apiPost.setGameToken(GameInstanceSingleton.getInstance().getGameInstance().getGameToken());
+        apiPost.setPokemonList(TeamList.getInstance().getBattleTeam().getTeam());
+        postData.createTeam(apiPost);
         Intent intent = new Intent(this, BattleScreenActivity.class);
         startActivity(intent);
     }
