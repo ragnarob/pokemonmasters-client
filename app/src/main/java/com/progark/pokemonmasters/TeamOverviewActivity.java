@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.progark.pokemonmasters.databinding.ItemTeamListBinding;
@@ -34,7 +35,15 @@ public class TeamOverviewActivity extends AppCompatActivity {
 
         ListView listView = findViewById(R.id.pokeTeams);
         listView.setAdapter(adapter);
-        Log.i("TeamList", teamList.toString());
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(TeamOverviewActivity.this, TeamActivity.class);
+                intent.putExtra("teamIndex", i);
+                startActivity(intent);
+
+            }
+        });
 
     }
 
@@ -46,9 +55,6 @@ public class TeamOverviewActivity extends AppCompatActivity {
 
 
     public void createTeam(View view) {
-        if (!(teamList.size() < 1)) {
-            Log.i("TeamList", teamList.getActiveTeam().toString());
-        }
         TeamList.getInstance().add(new PokemonTeam(0));
         Intent intent = new Intent(this, PokeSelectActivity.class);
         startActivity(intent);

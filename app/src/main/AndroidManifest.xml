@@ -14,18 +14,19 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".BattleScreenActivity"></activity>
+        <activity android:name=".TeamActivity"></activity>
+        <activity android:name=".BattleScreenActivity" />
         <activity
             android:name=".PokemonActivity"
-            android:parentActivityName=".PokeSelectActivity"/>
+            android:parentActivityName=".PokeSelectActivity" />
         <activity
             android:name=".PokeSelectActivity"
-            android:parentActivityName=".TeamOverviewActivity"/>
+            android:parentActivityName=".TeamOverviewActivity" />
         <activity
-            android:name=".BattleFriendsActivity"
+            android:name=".CreateGameActivity"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".FindBattleActivity"
+            android:name=".JoinGameActivity"
             android:parentActivityName=".MainActivity" />
         <activity
             android:name=".TeamOverviewActivity"

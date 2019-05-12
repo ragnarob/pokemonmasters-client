@@ -6,9 +6,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.progark.pokemonmasters.util.Data;
 import com.progark.pokemonmasters.util.PokeSingleton;
-import com.progark.pokemonmasters.util.TeamList;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,12 +26,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void findBattle(View view) {
-        Intent intent = new Intent(this, FindBattleActivity.class);
+        Intent intent = new Intent(this, JoinGameActivity.class);
         startActivity(intent);
     }
 
-    public void battleFriends(View view) {
-        Intent intent = new Intent(this, BattleScreenActivity.class);
+    public void createGame(View view) {
+        Intent intent = new Intent(this, CreateGameActivity.class);
         startActivity(intent);
     }
 
