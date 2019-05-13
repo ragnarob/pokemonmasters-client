@@ -14,7 +14,8 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".TeamActivity"></activity>
+        <activity android:name=".VictoryActivity"></activity>
+        <activity android:name=".TeamActivity" />
         <activity android:name=".BattleScreenActivity" />
         <activity
             android:name=".PokemonActivity"

@@ -90,5 +90,22 @@
             app:layout_constraintTop_toBottomOf="@+id/gameCode"
             tools:layout_editor_absoluteX="161dp" />
 
+        <TextView
+            android:id="@+id/timingHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:fontFamily="serif"
+            android:text="@string/TimingHint"
+            android:textSize="24sp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toTopOf="@+id/gameCode"
+            app:layout_constraintEnd_toEndOf="@+id/confirmButton"
+            app:layout_constraintStart_toStartOf="@+id/textInputLayout"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
     </android.support.constraint.ConstraintLayout>
 </layout>

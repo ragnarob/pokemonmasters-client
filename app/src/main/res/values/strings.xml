@@ -19,4 +19,6 @@
     <string name="UseTeamButt">Make Active Team</string>
     <string name="GoToBattleButt">Go to Battle</string>
     <string name="EnterGameCodeHint">Enter game code</string>
+    <string name="MainMenuButt">Back To Main Menu</string>
+    <string name="TimingHint">Allow joining player to confirm their name before pressing \"go to battle\"</string>
 </resources>
