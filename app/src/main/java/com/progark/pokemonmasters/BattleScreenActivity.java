@@ -13,12 +13,14 @@ import android.widget.TextView;
 
 import com.progark.pokemonmasters.model.GameInstance;
 import com.progark.pokemonmasters.model.GameState;
+import com.progark.pokemonmasters.model.GameStatePokemon;
 import com.progark.pokemonmasters.model.Pokemon;
 import com.progark.pokemonmasters.util.ApiPost;
 import com.progark.pokemonmasters.util.BattleReadyPokemon;
 import com.progark.pokemonmasters.util.BattleReadyPokemonListAdapter;
 import com.progark.pokemonmasters.util.Data;
 import com.progark.pokemonmasters.util.GameInstanceSingleton;
+import com.progark.pokemonmasters.util.PingLoop;
 import com.progark.pokemonmasters.util.PokeListAdapter;
 import com.progark.pokemonmasters.util.PokeSingleton;
 import com.progark.pokemonmasters.util.PokemonTeam;
@@ -32,10 +34,13 @@ import pl.droidsonroids.gif.GifImageView;
 public class BattleScreenActivity extends AppCompatActivity {
 
     private MediaPlayer mediaPlayer;
-    private BattleReadyPokemon myPokemon;
+    private GameStatePokemon myPokemon;
     private Data postData = new Data();
     private ApiPost apiPost = new ApiPost();
     private GameInstanceSingleton gameInstanceSingleton = GameInstanceSingleton.getInstance();
+    private String playerName = GameInstanceSingleton.getInstance().getPlayerName();
+    private int roundNumber;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +53,15 @@ public class BattleScreenActivity extends AppCompatActivity {
 
 
         PokemonTeam myPokeTeam = TeamList.getInstance().getBattleTeam();
-        myPokemon = myPokeTeam.getPokemon(0);
-
-        updatePokemonViews();
+//        if (gameInstanceSingleton.getGameInstance().getState().getGameState().size() > 0) {
+//            for (GameState gameState : gameInstanceSingleton.getGameInstance().getState().getGameState()) {
+//                if (gameState.getPlayerName().equals(playerName)) {
+//                    myPokemon = gameState.getPokemon().get(0);
+//                    updatePokemonViews();
+//                }
+//
+//            }
+//        }
 
         final BattleReadyPokemonListAdapter adapter = new BattleReadyPokemonListAdapter(this, myPokeTeam.getTeam());
 
@@ -60,10 +71,16 @@ public class BattleScreenActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 BattleReadyPokemon pokemon = adapter.getItem(i);
-                myPokemon = pokemon;
+
+                apiPost.setGameToken(gameInstanceSingleton.getGameInstance().getGameToken());
+                apiPost.setPlayerName(playerName);
+                apiPost.setType("swap");
+                apiPost.setSwap(i);
+                postData.addAction(apiPost);
+
                 View pokeTeamList = findViewById(R.id.pokeTeamList);
                 pokeTeamList.setVisibility(View.GONE);
-                updatePokemonViews();
+//                updatePokemonViews();
                 View fightButton = findViewById(R.id.FightButton);
                 fightButton.setVisibility(View.VISIBLE);
                 View pokemonButton = findViewById(R.id.PokemonButton);
@@ -82,8 +99,8 @@ public class BattleScreenActivity extends AppCompatActivity {
     }
 
     public void updatePokemonViews(){
-        String pokeSpecies = myPokemon.getSpecies();
-        String myPokeNum = "b" + myPokemon.getId();
+        String pokeSpecies = myPokemon.getName();
+        String myPokeNum = "b" + myPokemon.getNum();
         TextView myPokemonName = (TextView) findViewById(R.id.myPokemonName);
         myPokemonName.setText(pokeSpecies);
 
@@ -97,8 +114,9 @@ public class BattleScreenActivity extends AppCompatActivity {
         }
 
         TextView myPokemonHealth = (TextView) findViewById(R.id.myHealth);
-        String health = PokeSingleton.getInstance().getSinglePokemon(myPokemon.getId()).getBaseStats().getHp().toString();
-        myPokemonHealth.setText(health+"/"+health+"HP");
+        String health = myPokemon.getStats().getHp();
+        String maxHealth = myPokemon.getBaseStats().getHp().toString();
+        myPokemonHealth.setText(health+"/"+maxHealth+"HP");
 
         Button move1 = findViewById(R.id.move1);
         move1.setText(myPokemon.getMoves().get(0));
@@ -141,23 +159,29 @@ public class BattleScreenActivity extends AppCompatActivity {
     }
 
     public void move1(View view){
-        apiPost.setGameCode(gameInstanceSingleton.getGameInstance().getGameCode());
         apiPost.setGameToken(gameInstanceSingleton.getGameInstance().getGameToken());
-        postData.getGameStatus(apiPost);
+        apiPost.setPlayerName(playerName);
+        apiPost.setType("move");
+        apiPost.setMove(myPokemon.getMoves().get(0));
+        postData.addAction(apiPost);
         visibilityReset();
     }
 
     public void move2(View view){
-        apiPost.setGameCode(gameInstanceSingleton.getGameInstance().getGameCode());
         apiPost.setGameToken(gameInstanceSingleton.getGameInstance().getGameToken());
-        postData.getGameStatus(apiPost);
+        apiPost.setPlayerName(playerName);
+        apiPost.setType("move");
+        apiPost.setMove(myPokemon.getMoves().get(1));
+        postData.addAction(apiPost);
         visibilityReset();
     }
 
     public void move3(View view){
-        apiPost.setGameCode(gameInstanceSingleton.getGameInstance().getGameCode());
         apiPost.setGameToken(gameInstanceSingleton.getGameInstance().getGameToken());
-        postData.getGameStatus(apiPost);
+        apiPost.setPlayerName(playerName);
+        apiPost.setType("move");
+        apiPost.setMove(myPokemon.getMoves().get(2));
+        postData.addAction(apiPost);
         visibilityReset();
     }
 
@@ -165,6 +189,7 @@ public class BattleScreenActivity extends AppCompatActivity {
         apiPost.setGameCode(gameInstanceSingleton.getGameInstance().getGameCode());
         apiPost.setGameToken(gameInstanceSingleton.getGameInstance().getGameToken());
         postData.getGameStatus(apiPost);
+//        postData.addAction(apiPost);
         visibilityReset();
     }
 
@@ -190,26 +215,41 @@ public class BattleScreenActivity extends AppCompatActivity {
             public void onPropertyChanged(Observable sender, int propertyId) {
                 if (propertyId == BR.state) {
                     GameInstance gameInstance = (GameInstance) sender;
+                    TextView messageView = findViewById(R.id.fightInfo);
+                    messageView.setText(gameInstance.getState().getMessage());
+                    roundNumber = gameInstance.getState().getRound();
                     for (GameState gameState : gameInstance.getState().getGameState()) {
-                        if (!(gameState.getPlayerName().equals(GameInstanceSingleton.getInstance().getPlayerName()))) {
-                            String opponentPokemonName = gameState.getPokemon().get(0).getName();
-                            String opponentPokemonId = "p" + gameState.getPokemon().get(0).getNum();
-                            String opponentPokemonHealth = gameState.getPokemon().get(0).getStats().getHp();
-                            String opponentPokemonMaxHealth = gameState.getPokemon().get(0).getBaseStats().getHp().toString();
+                        if ((!(gameState.getPlayerName().equals(playerName)))&&(gameState.getPokemon().size() > 0)) {
+                            for (GameStatePokemon pokemon : gameState.getPokemon()) {
+                                if (pokemon.getPositionInParty() == 1) {
+                                    String opponentPokemonName = gameState.getPokemon().get(0).getName();
+                                    String opponentPokemonId = "p" + gameState.getPokemon().get(0).getNum();
+                                    String opponentPokemonHealth = gameState.getPokemon().get(0).getStats().getHp();
+                                    String opponentPokemonMaxHealth = gameState.getPokemon().get(0).getBaseStats().getHp().toString();
 
-                            TextView opponentName = findViewById(R.id.opponentPokemonName);
-                            opponentName.setText(opponentPokemonName);
-                            TextView opponentHealth = findViewById(R.id.opponentHealth);
-                            opponentHealth.setText(opponentPokemonHealth+"/"+opponentPokemonMaxHealth+"HP");
+                                    TextView opponentName = findViewById(R.id.opponentPokemonName);
+                                    opponentName.setText(opponentPokemonName);
+                                    TextView opponentHealth = findViewById(R.id.opponentHealth);
+                                    opponentHealth.setText(opponentPokemonHealth+"/"+opponentPokemonMaxHealth+"HP");
 
-                            GifImageView opponentPokemonView = findViewById(R.id.opponentPokemon);
+                                    GifImageView opponentPokemonView = findViewById(R.id.opponentPokemon);
 
-                            try {
-                                GifDrawable sprite = new GifDrawable(getResources(), getResources().getIdentifier(opponentPokemonId, "drawable", "com.progark.pokemonmasters"));
-                                opponentPokemonView.setImageDrawable(sprite);
-                            } catch (IOException e) {
-                                e.printStackTrace();
+                                    try {
+                                        GifDrawable sprite = new GifDrawable(getResources(), getResources().getIdentifier(opponentPokemonId, "drawable", "com.progark.pokemonmasters"));
+                                        opponentPokemonView.setImageDrawable(sprite);
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
                             }
+
+                        }
+                        if ((gameState.getPlayerName().equals(playerName)) && gameState.getPokemon().size() > 0) {
+                            for (GameStatePokemon pokemon : gameState.getPokemon())
+                                if (pokemon.getPositionInParty() == 1) {
+                                    myPokemon = pokemon;
+                                    updatePokemonViews();
+                                }
                         }
                     }
 

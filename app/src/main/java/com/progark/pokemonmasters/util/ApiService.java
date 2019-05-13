@@ -1,7 +1,6 @@
 package com.progark.pokemonmasters.util;
 
 import com.progark.pokemonmasters.model.GameInstance;
-import com.progark.pokemonmasters.model.GameState;
 import com.progark.pokemonmasters.model.Pokemon;
 import com.progark.pokemonmasters.model.PokemonList;
 import com.progark.pokemonmasters.model.Status;
@@ -33,7 +32,7 @@ public interface ApiService {
     Single<Status> getGameStatus(@Body ApiPost apiPost);
 
     @POST("game/action")
-    Single<GameInstance> addAction(@Body ApiPost apiPost);
+    Single<Status> addAction(@Body ApiPost apiPost);
 
 
 }

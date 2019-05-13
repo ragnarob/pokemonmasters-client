@@ -8,6 +8,7 @@ public class ApiPost {
     private String gameToken;
     private String gameCode;
     private String type;
+    private String move;
     private int swap;
     private List<BattleReadyPokemon> pokemonList;
 
@@ -57,5 +58,13 @@ public class ApiPost {
 
     public void setPokemonList(List<BattleReadyPokemon> pokemonList) {
         this.pokemonList = pokemonList;
+    }
+
+    public String getMove() {
+        return move;
+    }
+
+    public void setMove(String move) {
+        this.move = move;
     }
 }

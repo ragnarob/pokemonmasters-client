@@ -15,6 +15,7 @@ import com.progark.pokemonmasters.databinding.ActivityCreateGameBinding;
 import com.progark.pokemonmasters.util.ApiPost;
 import com.progark.pokemonmasters.util.Data;
 import com.progark.pokemonmasters.util.GameInstanceSingleton;
+import com.progark.pokemonmasters.util.PingLoop;
 import com.progark.pokemonmasters.util.TeamList;
 
 public class CreateGameActivity extends AppCompatActivity {
@@ -65,6 +66,11 @@ public class CreateGameActivity extends AppCompatActivity {
         apiPost.setGameToken(GameInstanceSingleton.getInstance().getGameInstance().getGameToken());
         apiPost.setPokemonList(TeamList.getInstance().getBattleTeam().getTeam());
         postData.createTeam(apiPost);
+
+        PingLoop pingLoop = new PingLoop(GameInstanceSingleton.getInstance().getGameInstance().getGameToken());
+        Thread pingThread = new Thread(pingLoop);
+        pingThread.start();
+
         Intent intent = new Intent(this, BattleScreenActivity.class);
         startActivity(intent);
     }

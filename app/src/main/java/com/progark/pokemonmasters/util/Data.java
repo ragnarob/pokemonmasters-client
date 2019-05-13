@@ -107,7 +107,7 @@ public class Data {
                 });
     }
 
-    public void createTeam(ApiPost apiPost) {
+    public void createTeam(final ApiPost apiPost) {
         apiService.createTeam(apiPost).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Status>() {
@@ -119,7 +119,7 @@ public class Data {
                     @Override
                     public void onSuccess(Status status) {
                         Log.i("createTeamSSS", status.getStatus() + status.getError());
-
+                        updater();
                     }
 
                     @Override
@@ -141,7 +141,6 @@ public class Data {
                     @Override
                     public void onSuccess(Status status) {
                         updateGameInstance(status.getGameInstance());
-                        Log.i("getGameStatus", "Hope");
                     }
 
                     @Override
@@ -151,28 +150,59 @@ public class Data {
                 });
     }
 
+    public void addAction(ApiPost apiPost) {
+        apiService.addAction(apiPost).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new SingleObserver<Status>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        compositeDisposable.add(d);
+                    }
+
+                    @Override
+                    public void onSuccess(Status status) {
+                        Log.i("addActionSSS", status.getStatus() + status.getError());
+//                        updater();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("addActionEEE", e.getMessage());
+                    }
+                });
+    }
+
+    private void updater() {
+        ApiPost apiPost = new ApiPost();
+        apiPost.setGameToken(GameInstanceSingleton.getInstance().getGameInstance().getGameToken());
+        Data data = new Data();
+        data.getGameStatus(apiPost);
+    }
+
     private void updateGameInstance(GameInstance remoteInstance) {
         GameInstance localInstance = GameInstanceSingleton.getInstance().getGameInstance();
-        if (!(remoteInstance.getGameCode() == null)){
-            localInstance.setGameCode(remoteInstance.getGameCode());
-        }
-        if (!(remoteInstance.getGameToken() == null)){
-            localInstance.setGameToken(remoteInstance.getGameToken());
-        }
-        if (!(remoteInstance.getPlayerNames() == null)){
-            localInstance.setPlayerNames(remoteInstance.getPlayerNames());
-        }
-        if (!(remoteInstance.getState() == null)){
-            localInstance.setState(remoteInstance.getState());
-        }
-        if (!(remoteInstance.getId() == null)){
-            localInstance.setId(remoteInstance.getId());
-        }
-        if (!(remoteInstance.getGameStage() == null)){
-            localInstance.setGameStage(remoteInstance.getGameStage());
-        }
-        if (!(remoteInstance.getV() == null)){
-            localInstance.setV(remoteInstance.getV());
+        if (!(remoteInstance == null)) {
+            if (!(remoteInstance.getGameCode() == null)){
+                localInstance.setGameCode(remoteInstance.getGameCode());
+            }
+            if (!(remoteInstance.getGameToken() == null)){
+                localInstance.setGameToken(remoteInstance.getGameToken());
+            }
+            if (!(remoteInstance.getPlayerNames() == null)){
+                localInstance.setPlayerNames(remoteInstance.getPlayerNames());
+            }
+            if (!(remoteInstance.getState() == null)){
+                localInstance.setState(remoteInstance.getState());
+            }
+            if (!(remoteInstance.getId() == null)){
+                localInstance.setId(remoteInstance.getId());
+            }
+            if (!(remoteInstance.getGameStage() == null)){
+                localInstance.setGameStage(remoteInstance.getGameStage());
+            }
+            if (!(remoteInstance.getV() == null)){
+                localInstance.setV(remoteInstance.getV());
+            }
         }
 
     }

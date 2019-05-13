@@ -11,6 +11,7 @@ import android.widget.EditText;
 import com.progark.pokemonmasters.util.ApiPost;
 import com.progark.pokemonmasters.util.Data;
 import com.progark.pokemonmasters.util.GameInstanceSingleton;
+import com.progark.pokemonmasters.util.PingLoop;
 import com.progark.pokemonmasters.util.TeamList;
 
 public class JoinGameActivity extends AppCompatActivity {
@@ -54,6 +55,9 @@ public class JoinGameActivity extends AppCompatActivity {
     public void createTeam() {
         apiPost.setPokemonList(TeamList.getInstance().getBattleTeam().getTeam());
         apiPost.setGameToken(GameInstanceSingleton.getInstance().getGameInstance().getGameToken());
+        PingLoop pingLoop = new PingLoop(GameInstanceSingleton.getInstance().getGameInstance().getGameToken());
+        Thread pingThread = new Thread(pingLoop);
+        pingThread.start();
         postData.createTeam(apiPost);
 
     }
