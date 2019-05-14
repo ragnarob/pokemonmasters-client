@@ -113,7 +113,7 @@ public class BattleScreenActivity extends AppCompatActivity {
         }
 
         TextView myPokemonHealth = (TextView) findViewById(R.id.myHealth);
-        String health = myPokemon.getStats().getHp();
+        String health = String.valueOf(Math.round(Double.valueOf(myPokemon.getStats().getHp())));
         String maxHealth = myPokemon.getBaseStats().getHp().toString();
         myPokemonHealth.setText(health+"/"+maxHealth+"HP");
 
@@ -249,7 +249,7 @@ public class BattleScreenActivity extends AppCompatActivity {
                                 if (pokemon.getPositionInParty() == 1) {
                                     String opponentPokemonName = pokemon.getName();
                                     String opponentPokemonId = "p" + pokemon.getNum();
-                                    String opponentPokemonHealth = pokemon.getStats().getHp();
+                                    String opponentPokemonHealth = String.valueOf(Math.round(Double.valueOf(pokemon.getStats().getHp())));
                                     String opponentPokemonMaxHealth = pokemon.getBaseStats().getHp().toString();
 
                                     TextView opponentName = findViewById(R.id.opponentPokemonName);
