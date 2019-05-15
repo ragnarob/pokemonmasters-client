@@ -13,6 +13,8 @@ import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 
 import java.lang.reflect.Field;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
@@ -20,16 +22,25 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class Data {
 
+
+    private final OkHttpClient okHttpClient = new OkHttpClient()
+            .newBuilder()
+            .readTimeout(10, TimeUnit.SECONDS)
+            .connectTimeout(10, TimeUnit.SECONDS)
+            .build();
+
     private Retrofit retrofit = new Retrofit.Builder()
             .baseUrl("http://134.209.77.105/api/")
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(okHttpClient)
             .build();
 
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -150,7 +161,7 @@ public class Data {
                 });
     }
 
-    public void addAction(ApiPost apiPost) {
+    public void addAction(final ApiPost apiPost) {
         apiService.addAction(apiPost).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new SingleObserver<Status>() {
@@ -162,7 +173,15 @@ public class Data {
                     @Override
                     public void onSuccess(Status status) {
                         Log.i("addActionSSS", status.getStatus() + status.getError());
-//                        updater();
+                        if (status.getError() != null) {
+                            Random r = new Random();
+                            try {
+                                Thread.sleep(r.nextInt(5000));
+                            } catch (InterruptedException e) {
+                                e.printStackTrace();
+                            }
+                            addAction(apiPost);
+                        }
                     }
 
                     @Override
@@ -177,6 +196,10 @@ public class Data {
         apiPost.setGameToken(GameInstanceSingleton.getInstance().getGameInstance().getGameToken());
         Data data = new Data();
         data.getGameStatus(apiPost);
+    }
+
+    public void reliableAction(ApiPost apiPost) {
+        addAction(apiPost);
     }
 
     private void updateGameInstance(GameInstance remoteInstance) {
